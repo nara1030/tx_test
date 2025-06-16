@@ -31,6 +31,12 @@ innerMethod5 메소드처럼 (outerMethod5 메소드와) 같은 클래스 내에
 하지만 확인을 위해 아래 코드를 추가해주었고, 그 결과는 하단 이미지와 같다.
 Connection connection = DataSourceUtils.getConnection(dataSource);
 
+※ Facade에서 Service 호출하는 경우
+둘 다 @Service긴 하지만 Facade 클래스에서 Service 클래스의 메소드들을 호출하는 경우,
+최초 진입점인 Facade 클래스의 @Transactional 메소드에서 트랜잭션이 시작하며,
+Service 메소드 실행시에도 같은 트랜잭션이 유지된다.
+다만 Facade에서 Service 호출이 아닌, Service에서 Service 호출 시엔 트랜잭션이 유지되지 않는다.
+
 ※ CGLIB과 JDK 동적 프록시
 스프링은 트랜잭션 처리나 AOP 기능을 프록시 기반으로 제공하며,
 클래스가 인터페이스를 구현하면 JDK 프록시, 그렇지 않으면 CGLIB를 사용한다.
